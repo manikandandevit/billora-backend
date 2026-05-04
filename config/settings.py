@@ -138,6 +138,10 @@ if not DEBUG:
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Optional: public API origin (no trailing slash). Ensures company_logo_url in JSON points at Render
+# even when X-Forwarded-* headers are missing in some contexts. Example: https://billora-backend-xxx.onrender.com
+PUBLIC_API_BASE_URL = os.environ.get("PUBLIC_API_BASE_URL", "").strip().rstrip("/")
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 _email_host = os.environ.get("EMAIL_HOST", "").strip()

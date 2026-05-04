@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .absolute_urls import public_absolute_uri
 from .models import Branch, Client, Head
 from .permissions import IsBranch, IsHead, IsHeadOrClient
 from .serializers import (
@@ -42,7 +43,7 @@ class PublicBrandingView(APIView):
         head = Head.objects.order_by("pk").first()
         logo_url = None
         if head and head.company_logo:
-            logo_url = request.build_absolute_uri(head.company_logo.url)
+            logo_url = public_absolute_uri(request, head.company_logo.url)
         return Response({"company_logo_url": logo_url, "app_name": "Billora"})
 
 

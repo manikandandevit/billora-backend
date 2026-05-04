@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from rest_framework import serializers
 
+from .absolute_urls import public_absolute_uri
 from .models import Branch, Client, Head, SubscriptionType
 
 
@@ -28,7 +29,7 @@ class HeadProfileSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         if not obj.company_logo or not request:
             return None
-        return request.build_absolute_uri(obj.company_logo.url)
+        return public_absolute_uri(request, obj.company_logo.url)
 
 
 class HeadProfileUpdateSerializer(serializers.Serializer):
