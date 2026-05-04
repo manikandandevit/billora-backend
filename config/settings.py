@@ -236,6 +236,7 @@ CSRF_TRUSTED_ORIGINS = (
 if USE_TLS:
     if _env_bool("TRUST_PROXY_SSL", "false"):
         SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+        USE_X_FORWARDED_HOST = True
 
     SECURE_SSL_REDIRECT = _env_bool("SECURE_SSL_REDIRECT", "true")
     SESSION_COOKIE_SECURE = True
